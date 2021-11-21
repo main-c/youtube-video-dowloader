@@ -35,28 +35,7 @@
      <property name="currentText">
       <string>Ubuntu</string>
      </property>
-     <property name="writingSystem">
-      <enum>QFontDatabase::Latin</enum>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="0">
-    <widget class="QLabel" name="image">
-     <property name="maximumSize">
-      <size>
-       <width>67</width>
-       <height>61</height>
-      </size>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="pixmap">
-      <pixmap>../../../../../../.designer/backup/img/play(1).png</pixmap>
-     </property>
-     <property name="scaledContents">
-      <bool>true</bool>
-     </property>
+     
     </widget>
    </item>
    <item row="6" column="0" colspan="4">
@@ -552,6 +531,28 @@
      </property>
      <property name="textInteractionFlags">
       <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0" rowspan="2">
+    <widget class="QLabel" name="image">
+     <property name="maximumSize">
+      <size>
+       <width>67</width>
+       <height>61</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(&quot;jksqdbkjqsd&quot;);</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap>../../../../../../.designer/backup/img/play(1).png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
      </property>
     </widget>
    </item>

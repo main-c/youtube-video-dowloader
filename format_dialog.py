@@ -11,7 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Dialog(QtWidgets.QWidget):
+class Format_Dialog(QtWidgets.QDialog):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(667, 392)
@@ -26,13 +26,6 @@ class Dialog(QtWidgets.QWidget):
         self.format_combox_2.setMaximumSize(QtCore.QSize(182, 25))
         self.format_combox_2.setObjectName("format_combox_2")
         self.gridLayout_2.addWidget(self.format_combox_2, 2, 0, 1, 2)
-        self.image = QtWidgets.QLabel(Dialog)
-        self.image.setMaximumSize(QtCore.QSize(67, 61))
-        self.image.setText("")
-        self.image.setPixmap(QtGui.QPixmap("../../../../../../.designer/backup/img/play(1).png"))
-        self.image.setScaledContents(True)
-        self.image.setObjectName("image")
-        self.gridLayout_2.addWidget(self.image, 0, 0, 1, 1)
         self.lineEdit = QtWidgets.QLineEdit(Dialog)
         self.lineEdit.setObjectName("lineEdit")
         self.gridLayout_2.addWidget(self.lineEdit, 6, 0, 1, 4)
@@ -64,6 +57,7 @@ class Dialog(QtWidgets.QWidget):
         self.duration.setObjectName("duration")
         self.gridLayout_2.addWidget(self.duration, 1, 1, 1, 1)
         self.extension_combox = QtWidgets.QFontComboBox(Dialog)
+        self.extension_combox.setEditable(False)
         self.extension_combox.setObjectName("extension_combox")
         self.gridLayout_2.addWidget(self.extension_combox, 2, 3, 1, 1)
         self.scrollArea = QtWidgets.QScrollArea(Dialog)
@@ -192,16 +186,24 @@ class Dialog(QtWidgets.QWidget):
         self.link.setTextInteractionFlags(QtCore.Qt.LinksAccessibleByMouse|QtCore.Qt.TextSelectableByKeyboard|QtCore.Qt.TextSelectableByMouse)
         self.link.setObjectName("link")
         self.gridLayout_2.addWidget(self.link, 1, 2, 1, 2)
+        self.image = QtWidgets.QLabel(Dialog)
+        self.image.setMaximumSize(QtCore.QSize(67, 61))
+        self.image.setStyleSheet("background-image: url(\"jksqdbkjqsd\");")
+        self.image.setText("")
+        self.image.setPixmap(QtGui.QPixmap("../../../../../../.designer/backup/img/play(1).png"))
+        self.image.setScaledContents(True)
+        self.image.setObjectName("image")
+        self.gridLayout_2.addWidget(self.image, 0, 0, 2, 1)
 
         self.retranslateUi(Dialog)
         self.format_combox_2.currentTextChanged['QString'].connect(self.scrollArea.update)
-        self.pushButton_2.clicked.connect(Dialog.close)
+        self.pushButton_2.clicked.connect(Dialog.exec)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
-        self.format_combox_2.setCurrentText(_translate("Dialog", "Download video"))
+        self.format_combox_2.setCurrentText(_translate("Dialog", "Ubuntu"))
         self.label_4.setText(_translate("Dialog", "Format :"))
         self.pushButton_2.setText(_translate("Dialog", "Cancel"))
         self.pushButton_3.setText(_translate("Dialog", "Download"))
@@ -233,7 +235,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     Dialog = QtWidgets.QDialog()
-    ui = Dialog()
+    ui = Format_Dialog()
     ui.setupUi(Dialog)
     Dialog.show()
     sys.exit(app.exec_())

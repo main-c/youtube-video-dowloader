@@ -1,25 +1,37 @@
 import sys
-from PyQt5.QtWidgets import QApplication,  QMainWindow, QMessageBox
+from PyQt5.QtWidgets import QApplication, QLabel,  QMainWindow, QMessageBox
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import Qt
-from pytube import Playlist, YouTube, exceptions
+from pytube import Playlist, YouTube, exceptions, request
 from main_window import Ui_MainWindow
 from smart_mode_dialog import Ui_Dialog
-from format_dialog import Dialog
+from format_dialog import Format_Dialog
 from hurry.filesize import size, alternative
 
-class FormatDialog(Dialog):
+class FormatDialog(Format_Dialog):
     def __init__(self):
         super().__init__()
-        Dialog.__init__(self)
+        Format_Dialog.__init__(self)
         
         self.setupUi(self)
+        
         self.format_combox_2.addItems(['Download Video', 'Extract Audio'])
         self.format_combox_2.currentTextChanged.connect(self.current_text)
-        self.current_text()
+        self.format_combox_2.setCurrentText('Download Video')
     
     def current_text(self):
+        print("the text has changed")
         self.choosed_format = self.format_combox_2.currentText()
+        print(f'{self.choosed_format}')
+    
+    #   for getting the video image from web
+    def get_thumbnail_image(self, image_label, thumbnail_url):
+        image = QtGui.QImage()
+        image.loadFromData(request.get(thumbnail_url))
+
+        image_label = QLabel()
+        image_label.setPixmap(image)
+    
 
 class SmartDialog(Ui_Dialog):
     def __init__(self):
@@ -87,17 +99,22 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def show_detail_dialog(self):
         pass
 
-
+  
 
     def get_format(self):
         yt = self.get_yt_video()
         if yt :
             self.format = FormatDialog()
+            # updating video ingo
+            self.format.title.setText(yt.title)
+            self.format.duration.setText(str(yt.length))
+            self.format.image.setStyleSheet("background-image: url({});".format(str(yt.thumbnail_url)))
+
             choosed_format = self.format.choosed_format
             if choosed_format == 'Extract Audio':
                 self.extract_audio(yt, self.format)
             else:
-                self.dowload_video(yt, self.format)
+                self.download_video(yt, self.format)
 
     def extract_audio(self, yt, format_dialog):
         format_dialog.high_def_button_2.setText('Low Quality')
@@ -139,7 +156,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         except Exception as e:
             raise e 
 
-    def dowload_video(self, yt, format_dialog:FormatDialog):
+    def download_video(self, yt, format_dialog:FormatDialog):
         try : 
             stream = yt.streams.filter(progressive=True)
             stream = stream.filter(file_extension='mp4')
