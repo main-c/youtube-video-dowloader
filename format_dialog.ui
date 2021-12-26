@@ -14,55 +14,11 @@
    <string>Dialog</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
-   <item row="3" column="0" colspan="5">
-    <widget class="Line" name="line">
+   <item row="5" column="0" colspan="5">
+    <widget class="Line" name="line_2">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
-    </widget>
-   </item>
-   <item row="2" column="0" colspan="2">
-    <widget class="QFontComboBox" name="format_combox_2">
-     <property name="maximumSize">
-      <size>
-       <width>182</width>
-       <height>25</height>
-      </size>
-     </property>
-     <property name="editable">
-      <bool>false</bool>
-     </property>
-     <property name="currentText">
-      <string>Ubuntu</string>
-     </property>
-     
-    </widget>
-   </item>
-   <item row="6" column="0" colspan="4">
-    <widget class="QLineEdit" name="lineEdit"/>
-   </item>
-   <item row="2" column="2">
-    <widget class="QLabel" name="label_4">
-     <property name="text">
-      <string>Format :</string>
-     </property>
-    </widget>
-   </item>
-   <item row="7" column="4">
-    <widget class="QSplitter" name="splitter_2">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <widget class="QPushButton" name="pushButton_2">
-      <property name="text">
-       <string>Cancel</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_3">
-      <property name="text">
-       <string>Download</string>
-      </property>
-     </widget>
     </widget>
    </item>
    <item row="0" column="1" colspan="4">
@@ -90,10 +46,76 @@
      </property>
     </widget>
    </item>
-   <item row="5" column="0" colspan="5">
-    <widget class="Line" name="line_2">
+   <item row="6" column="0" colspan="4">
+    <widget class="QLineEdit" name="lineEdit"/>
+   </item>
+   <item row="0" column="0" rowspan="2">
+    <widget class="QLabel" name="image">
+     <property name="maximumSize">
+      <size>
+       <width>67</width>
+       <height>61</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(&quot;https://www.google.com/imgres?imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fen%2F6%2F66%2FUnited_Nations_Decade_of_Education_for_Sustainable_Development.jpg&amp;imgrefurl=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FUnited_Nations_Decade_of_Education_for_Sustainable_Development&amp;tbnid=RiL8O0nQbd6fFM&amp;vet=12ahUKEwj39Jj5q4L1AhXkhP0HHfAwDaoQMygAegUIARCcAQ..i&amp;docid=_mcW-yUb_lYy0M&amp;w=200&amp;h=200&amp;q=desd&amp;client=ubuntu&amp;ved=2ahUKEwj39Jj5q4L1AhXkhP0HHfAwDaoQMygAegUIARCcAQ&quot;);</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap>img/play(1).png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0" colspan="5">
+    <widget class="Line" name="line">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="2" colspan="2">
+    <widget class="QLabel" name="link">
+     <property name="text">
+      <string>https://youtu.be/YySB6tkjZ7Y</string>
+     </property>
+     <property name="openExternalLinks">
+      <bool>true</bool>
+     </property>
+     <property name="textInteractionFlags">
+      <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0" colspan="2">
+    <widget class="QFontComboBox" name="format_combox_2">
+     <property name="maximumSize">
+      <size>
+       <width>182</width>
+       <height>25</height>
+      </size>
+     </property>
+     <property name="editable">
+      <bool>false</bool>
+     </property>
+     <property name="currentText">
+      <string>Abyssinica SIL</string>
+     </property>
+     <property name="maxVisibleItems">
+      <number>2</number>
+     </property>
+     <property name="maxCount">
+      <number>2</number>
+     </property>
+     <property name="insertPolicy">
+      <enum>QComboBox::NoInsert</enum>
+     </property>
+     <property name="writingSystem">
+      <enum>QFontDatabase::Latin</enum>
      </property>
     </widget>
    </item>
@@ -104,11 +126,28 @@
      </property>
     </widget>
    </item>
-   <item row="2" column="3">
-    <widget class="QFontComboBox" name="extension_combox">
-     <property name="editable">
-      <bool>false</bool>
+   <item row="6" column="4">
+    <widget class="QPushButton" name="pushButton">
+     <property name="text">
+      <string>Browse</string>
      </property>
+    </widget>
+   </item>
+   <item row="7" column="4">
+    <widget class="QSplitter" name="splitter_2">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <widget class="QPushButton" name="pushButton_2">
+      <property name="text">
+       <string>Cancel</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_3">
+      <property name="text">
+       <string>Download</string>
+      </property>
+     </widget>
     </widget>
    </item>
    <item row="4" column="0" colspan="5">
@@ -121,7 +160,7 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>647</width>
+        <width>633</width>
         <height>198</height>
        </rect>
       </property>
@@ -514,45 +553,17 @@
      </widget>
     </widget>
    </item>
-   <item row="6" column="4">
-    <widget class="QPushButton" name="pushButton">
-     <property name="text">
-      <string>Browse</string>
+   <item row="2" column="3">
+    <widget class="QFontComboBox" name="extension_combox">
+     <property name="editable">
+      <bool>false</bool>
      </property>
     </widget>
    </item>
-   <item row="1" column="2" colspan="2">
-    <widget class="QLabel" name="link">
+   <item row="2" column="2">
+    <widget class="QLabel" name="label_4">
      <property name="text">
-      <string>https://youtu.be/YySB6tkjZ7Y</string>
-     </property>
-     <property name="openExternalLinks">
-      <bool>true</bool>
-     </property>
-     <property name="textInteractionFlags">
-      <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="0" rowspan="2">
-    <widget class="QLabel" name="image">
-     <property name="maximumSize">
-      <size>
-       <width>67</width>
-       <height>61</height>
-      </size>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-image: url(&quot;jksqdbkjqsd&quot;);</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="pixmap">
-      <pixmap>../../../../../../.designer/backup/img/play(1).png</pixmap>
-     </property>
-     <property name="scaledContents">
-      <bool>true</bool>
+      <string>Format :</string>
      </property>
     </widget>
    </item>
