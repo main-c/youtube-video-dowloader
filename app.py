@@ -7,6 +7,9 @@ from main_window import Ui_MainWindow
 from smart_mode_dialog import Ui_Dialog
 from format_dialog import Format_Dialog
 from hurry.filesize import size, alternative
+from loguru import logger
+import datetime 
+
 
 class FormatDialog(Format_Dialog):
     def __init__(self):
@@ -15,12 +18,13 @@ class FormatDialog(Format_Dialog):
         
         self.setupUi(self)
         
+        self.format_combox_2.clear()
         self.format_combox_2.addItems(['Download Video', 'Extract Audio'])
         self.format_combox_2.currentTextChanged.connect(self.current_text)
-        self.format_combox_2.setCurrentText('Download Video')
+        self.choosed_format = 'Download Video'
     
     def current_text(self):
-        print("the text has changed")
+        logger.info(f'the current format is: {self.format_combox_2.currentText()}')
         self.choosed_format = self.format_combox_2.currentText()
         print(f'{self.choosed_format}')
     
@@ -60,7 +64,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def smart_mode_slot(self):
         if self.smart_mode_dialog == None:
-            self.smart_mode_dialog = Smart_Dialog()
+            self.smart_mode_dialog = SmartDialog()
             self.smart_mode_dialog.show()
 
         else:
@@ -100,20 +104,22 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         pass
 
   
-
+    # choosing format of the music
     def get_format(self):
         yt = self.get_yt_video()
         if yt :
             self.format = FormatDialog()
             # updating video ingo
             self.format.title.setText(yt.title)
-            self.format.duration.setText(str(yt.length))
+            self.format.duration.setText(str(datetime.timedelta(seconds=yt.length)))
             self.format.image.setStyleSheet("background-image: url({});".format(str(yt.thumbnail_url)))
+            
 
             choosed_format = self.format.choosed_format
+            logger.debug(f'choosed format is:{choosed_format}')
             if choosed_format == 'Extract Audio':
                 self.extract_audio(yt, self.format)
-            else:
+            elif choosed_format == 'Download Video': 
                 self.download_video(yt, self.format)
 
     def extract_audio(self, yt, format_dialog):
@@ -160,7 +166,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         try : 
             stream = yt.streams.filter(progressive=True)
             stream = stream.filter(file_extension='mp4')
-            print(stream)
             res = []
             for video in stream:
                 res.append(video.resolution)
@@ -168,7 +173,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             if '1080p' not in res:
                 format_dialog.high_def_button.setCheckable(False)
                 format_dialog.label_7 = None
+                format_dialog.gridLayout = None
+                print('the 1080p format is not avalaible')
             else:
+                logger.info('the 1080p format is avalaible')
                 music = stream.filter(resolution='1080p').first()
                 filesize = music.filesize
                 format_dialog.label_7.setText(size(filesize, system=alternative))
@@ -179,6 +187,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 format_dialog.high_def_button_2.setCheckable(False)
                 format_dialog.label_9 = None
             else:
+                logger.info('the 720p format is avalaible')
                 music = stream.filter(resolution='720p').first()
                 filesize = music.filesize
                 format_dialog.label_9.setText(size(filesize, system=alternative))
@@ -189,6 +198,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 format_dialog.high_def_button_3.setCheckable(False)
                 format_dialog.label_12 = None
             else:
+                logger.info('the 480p format is avalaible')
                 music = stream.filter(resolution='480p').first()
                 filesize = music.filesize
                 format_dialog.label_12.setText(size(filesize, system=alternative))
@@ -199,6 +209,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 format_dialog.high_def_button_4.setCheckable(False)
                 format_dialog.label_16 = None
             else:
+                logger.info('the 360p format is avalaible')
                 music = stream.filter(resolution='360p').first()
                 filesize = music.filesize
                 format_dialog.label_16.setText(size(filesize, system=alternative))
@@ -206,9 +217,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     self.for_download = music
 
             if '240p' not in res:
+                
                 format_dialog.high_def_button_5.setCheckable(False)
                 format_dialog.label_17 = None
             else:
+                logger.info('the 240p format is avalaible')
                 music = stream.filter(resolution='240p').first()
                 filesize = music.filesize
                 format_dialog.label_17.setText(size(filesize, system=alternative))
@@ -219,6 +232,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 format_dialog.high_def_button_6.setCheckable(False)
                 format_dialog.label_19 = None
             else:
+                logger.info('the 144 format is avalaible')
                 music = stream.filter(resolution='144p').first()
                 filesize = music.filesize
                 format_dialog.label_19.setText(size(filesize, system=alternative))
@@ -228,6 +242,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             format_dialog.show()
 
         except Exception as e:
+            logger.error({e})
             raise e 
     
     def load_data(self):
